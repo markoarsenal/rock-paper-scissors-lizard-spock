@@ -1,0 +1,15 @@
+.gameContainer {
+  background: linear-gradient(
+    to right,
+    var(--main-color),
+    var(--secondary-color)
+  );
+}
+
+.leftSection {
+  background: url("../../assets/images/bg-2.svg") center/cover;
+}
+
+.rightSection {
+  background: url("../../assets/images/bg-1.svg") center/cover;
+}
