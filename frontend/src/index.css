@@ -3,11 +3,21 @@
 :root {
   --main-color: #49b9ba;
   --secondary-color: #eb8a69;
+  --default-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
 
+  --btn-animate-duration: 500;
+}
+
+@theme inline {
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
+
+  --color-main: var(--main-color);
+  --color-secondary: var(--secondary-color);
+
+  --shadow-default: var(--default-shadow);
 }
 
 body {

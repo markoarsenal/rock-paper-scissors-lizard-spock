@@ -5,7 +5,7 @@
   font-size: 1.5rem;
   color: white;
   background-color: var(--main-color);
-  box-shadow: 5px 5px 4px rgba(#000, 0.25);
+  box-shadow: var(--default-shadow);
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
@@ -23,7 +23,7 @@
     position: absolute;
     left: -20%;
     z-index: -1000;
-    transition: all ease-in-out 0.5s;
+    transition: all ease-in-out var(--btn-animate-duration);
     background-repeat: no-repeat;
   }
 
@@ -81,11 +81,11 @@
   &.animate {
     &:before {
       display: block;
-      animation: topBubbles ease-in-out 0.5s forwards;
+      animation: topBubbles ease-in-out var(--btn-animate-duration) forwards;
     }
     &:after {
       display: block;
-      animation: bottomBubbles ease-in-out 0.5s forwards;
+      animation: bottomBubbles ease-in-out var(--btn-animate-duration) forwards;
     }
   }
 }
