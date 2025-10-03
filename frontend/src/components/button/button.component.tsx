@@ -1,18 +1,18 @@
-import { useState, useRef, useEffect } from "react";
-import clsx from "clsx";
+import { useState, useRef, useEffect } from 'react';
+import clsx from 'clsx';
 
-import type { ButtonProps } from "./button.props";
-import styles from "./button.module.scss";
+import type { ButtonProps } from './button.props';
+import styles from './button.module.scss';
 
 export const Button = ({ children, className, ...props }: ButtonProps) => {
-  const [clickClassName, setClickClassName] = useState("");
-  const timeout = useRef<NodeJS.Timeout | null>(null);
+  const [clickClassName, setClickClassName] = useState('');
+  const timeout = useRef<number | null>(null);
 
   const clickHandler = () => {
     if (!clickClassName) {
       setClickClassName(styles.animate);
       timeout.current = setTimeout(() => {
-        setClickClassName("");
+        setClickClassName('');
       }, 500); // Match the animation duration
     }
   };
@@ -24,11 +24,7 @@ export const Button = ({ children, className, ...props }: ButtonProps) => {
   }, []);
 
   return (
-    <button
-      className={clsx(styles.button, clickClassName, className)}
-      onClick={clickHandler}
-      {...props}
-    >
+    <button className={clsx(styles.button, clickClassName, className)} onClick={clickHandler} {...props}>
       {children}
     </button>
   );

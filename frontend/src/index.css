@@ -1,14 +1,19 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --main-color: #49b9ba;
   --secondary-color: #eb8a69;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
 }
 
 body {
-  font-family: "DynaPuff", system-ui;
+  font-family: 'DynaPuff', system-ui;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  font-variation-settings: "width" 100;
+  font-variation-settings: 'width' 100;
 }

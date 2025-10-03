@@ -1,15 +1,20 @@
 .gameContainer {
-  background: linear-gradient(
-    to right,
-    var(--main-color),
-    var(--secondary-color)
-  );
+  background: linear-gradient(to bottom, var(--main-color), var(--secondary-color));
+
+  @media (min-width: var(--breakpoint-lg)) {
+    background: linear-gradient(to right, var(--main-color), var(--secondary-color));
+  }
 }
 
 .leftSection {
-  background: url("../../assets/images/bg-2.svg") center/cover;
+  background: url('../../assets/images/bg-2.svg') center/cover;
 }
 
 .rightSection {
-  background: url("../../assets/images/bg-1.svg") center/cover;
+  background: url('../../assets/images/bg-1.svg') center/cover;
+}
+
+.player,
+.computer {
+  filter: drop-shadow(5px 5px 4px rgba(#000, 0.25));
 }
