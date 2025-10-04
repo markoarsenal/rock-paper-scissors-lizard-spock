@@ -4,6 +4,8 @@ import clsx from 'clsx';
 import styles from './choices.module.scss';
 import { type ChoicesProps } from './choices.props';
 import { options } from './options';
+import { Button } from '@/components/button';
+import DiceIcon from '@/assets/icons/dice.svg?react';
 
 export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
   return (
@@ -50,6 +52,16 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
           </button>
         );
       })}
+      <div className="w-1/4 aspect-square absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate__animated animate__zoomInDown">
+        <Button
+          className={clsx(
+            'w-full h-full !p-0 !rounded-full animate__animated animate__pulse animate__infinite animate__delay-1s',
+            !value && 'active:scale-90 active:shadow-secondary',
+          )}
+        >
+          <DiceIcon width={32} height={32} />
+        </Button>
+      </div>
     </div>
   );
 };

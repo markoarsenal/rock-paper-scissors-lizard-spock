@@ -25,4 +25,9 @@ body {
   font-style: normal;
   font-variation-settings: 'width' 100;
   color: white;
+  background: linear-gradient(to bottom, var(--main-color), var(--secondary-color));
+
+  @media (min-width: 1024px) {
+    background: linear-gradient(to right, var(--main-color), var(--secondary-color));
+  }
 }
