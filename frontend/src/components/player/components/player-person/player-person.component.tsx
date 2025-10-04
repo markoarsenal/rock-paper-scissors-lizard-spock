@@ -5,5 +5,5 @@ import { PlayerBase } from '../player-base';
 import type { PlayerProps } from '../../player.props';
 
 export const PlayerPerson: FC<PlayerProps> = props => {
-  return <PlayerBase image={player} {...props} />;
+  return <PlayerBase image={player} thumbnailClassName="bg-main" {...props} />;
 };

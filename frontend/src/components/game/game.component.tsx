@@ -5,6 +5,7 @@ import { Button } from '@/components/button';
 import { PlayerPerson, PlayerComputer } from '@/components/player';
 import { getCssVariable } from '@/helpers/css-variables';
 import { Choices } from '@/components/choices';
+import { Loader } from '@/components/loader';
 
 import styles from './game.module.scss';
 
@@ -29,6 +30,7 @@ export const Game = () => {
         className={clsx(styles.rightSection, 'w-full h-full flex items-center justify-center lg:w-1/2 relative')}
       >
         <PlayerComputer showAsThumbnail={game.started} animateShake={!game.started} />
+        {game.started && <Loader text="Computer is waiting for your move" />}
       </section>
       {showStartButton && (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate__animated animate__zoomInDown">

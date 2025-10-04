@@ -5,11 +5,19 @@ import type { PlayerBaseProps } from './player-base.props';
 
 import styles from './player-base.module.scss';
 
-export const PlayerBase: FC<PlayerBaseProps> = ({ image, animateShake = true, showAsThumbnail = false }) => {
+export const PlayerBase: FC<PlayerBaseProps> = ({
+  image,
+  animateShake = true,
+  showAsThumbnail = false,
+  thumbnailClassName,
+}) => {
   const shakeClass = animateShake ? 'animate__animated animate__headShake animate__infinite' : '';
 
   const thumbnailClass = showAsThumbnail
-    ? 'w-[100px] h-[100px] p-2 rounded-full border-4 border-white shadow-default top-4 left-4 translate-none'
+    ? clsx(
+        'w-[100px] h-[100px] p-2 rounded-full border-4 border-white shadow-none top-4 left-4 translate-none',
+        thumbnailClassName,
+      )
     : 'h-1/2 max-h-[500px] lg:w-1/2 lg:max-w-[400px] lg:h-auto lg:max-h-none';
 
   return (

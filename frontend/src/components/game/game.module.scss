@@ -1,7 +1,7 @@
 .gameContainer {
   background: linear-gradient(to bottom, var(--main-color), var(--secondary-color));
 
-  @media (min-width: var(--breakpoint-lg)) {
+  @media (min-width: 1024px) {
     background: linear-gradient(to right, var(--main-color), var(--secondary-color));
   }
 }

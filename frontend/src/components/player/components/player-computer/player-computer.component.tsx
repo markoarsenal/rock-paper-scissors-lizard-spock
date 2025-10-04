@@ -5,5 +5,5 @@ import { PlayerBase } from '../player-base';
 import type { PlayerProps } from '../../player.props';
 
 export const PlayerComputer: FC<PlayerProps> = props => {
-  return <PlayerBase image={computer} {...props} />;
+  return <PlayerBase image={computer} thumbnailClassName="bg-secondary" {...props} />;
 };
