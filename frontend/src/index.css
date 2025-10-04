@@ -3,16 +3,19 @@
 :root {
   --main-color: #49b9ba;
   --secondary-color: #eb8a69;
+  --secondary-color-dark: #e4665b;
 
   --default-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
   --secondary-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.25);
 
   --btn-animate-duration: 500;
+  --dice-animate-duration: 1000;
 }
 
 @theme inline {
   --color-main: var(--main-color);
   --color-secondary: var(--secondary-color);
+  --color-secondary-dark: var(--secondary-color-dark);
 
   --shadow-default: var(--default-shadow);
   --shadow-secondary: var(--secondary-shadow);

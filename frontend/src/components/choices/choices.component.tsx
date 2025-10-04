@@ -1,13 +1,19 @@
 import type { FC } from 'react';
 import clsx from 'clsx';
 
-import styles from './choices.module.scss';
 import { type ChoicesProps } from './choices.props';
 import { options } from './options';
-import { Button } from '@/components/button';
-import DiceIcon from '@/assets/icons/dice.svg?react';
+import { ButtonRandomize } from '@/components/button-randomize';
+import { getRandomNumberUpTo } from '@/helpers/random-number';
+
+import styles from './choices.module.scss';
 
 export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
+  const randomizeHandler = async () => {
+    const number = await getRandomNumberUpTo(5);
+    onSelect?.(options[number - 1].value);
+  };
+
   return (
     <div className="aspect-square w-2/3 max-w-2/3 max-h-2/3 relative">
       {options.map(({ angle, label, image, value: choiceValue }) => {
@@ -53,14 +59,7 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
         );
       })}
       <div className="w-1/4 aspect-square absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate__animated animate__zoomInDown">
-        <Button
-          className={clsx(
-            'w-full h-full !p-0 !rounded-full animate__animated animate__pulse animate__infinite animate__delay-1s',
-            !value && 'active:scale-90 active:shadow-secondary',
-          )}
-        >
-          <DiceIcon width={32} height={32} />
-        </Button>
+        <ButtonRandomize disabled={Boolean(value)} onClick={randomizeHandler} />
       </div>
     </div>
   );

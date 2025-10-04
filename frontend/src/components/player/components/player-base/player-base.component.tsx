@@ -23,11 +23,13 @@ export const PlayerBase: FC<PlayerBaseProps> = ({
   return (
     <div
       className={clsx(
-        'flex items-center justify-center animate__animated animate__bounceIn transition-all transition-duration-1000 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
+        'transition-all duration-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
         thumbnailClass,
       )}
     >
-      <img src={image} alt="Player" className={clsx('h-full', styles.player, shakeClass)} />
+      <div className="w-full h-full flex items-center justify-center animate__animated animate__bounceIn">
+        <img src={image} alt="Player" className={clsx('h-full', styles.player, shakeClass)} />
+      </div>
     </div>
   );
 };

@@ -21,6 +21,23 @@
     transform: scale(1.1);
   }
 
+  &:active {
+    transform: scale(1);
+    box-shadow: var(--secondary-shadow);
+  }
+
+  &.disabled {
+    cursor: default;
+
+    &:hover {
+      transform: none;
+    }
+    &:active {
+      transform: none;
+      box-shadow: var(--default-shadow);
+    }
+  }
+
   &:before,
   &:after {
     content: '';
@@ -78,11 +95,6 @@
       15% 15%,
       10% 10%,
       20% 20%;
-  }
-
-  &:active {
-    transform: scale(1);
-    box-shadow: var(--secondary-shadow);
   }
 
   &.animate {
