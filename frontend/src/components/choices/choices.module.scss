@@ -1,14 +1,10 @@
-.choiceWrapper {
-  &:active {
-    animation: none;
-    transform: scale(0.9);
+.inactive {
+  &.choiceWrapper,
+  .choice {
+    transform: none;
   }
-}
 
-.choice {
-  transition: all 2s ease-in-out;
-  &:active {
-    transform: scale(0.9);
-    box-shadow: var(--secondary-shadow);
+  .choice {
+    box-shadow: var(--default-shadow);
   }
 }
