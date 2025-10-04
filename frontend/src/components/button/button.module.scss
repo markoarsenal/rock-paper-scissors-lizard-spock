@@ -15,7 +15,23 @@
   box-shadow: var(--default-shadow);
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
   position: relative;
+
+  &.small {
+    padding: 0.5rem 1rem;
+    border-width: 2px;
+    font-size: 1rem;
+
+    &.vertical {
+      padding: 1rem 0.5rem;
+    }
+  }
+
+  &.vertical {
+    padding: 2rem 0.75rem;
+    writing-mode: vertical-rl;
+  }
 
   &:hover {
     transform: scale(1.1);

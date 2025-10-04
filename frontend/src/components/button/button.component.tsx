@@ -6,7 +6,15 @@ import { getCssVariable } from '@/helpers/css-variables';
 
 import styles from './button.module.scss';
 
-export const Button = ({ children, className, disabled, onClick, ...props }: ButtonProps) => {
+export const Button = ({
+  children,
+  className,
+  disabled,
+  size = 'medium',
+  direction = 'horizontal',
+  onClick,
+  ...props
+}: ButtonProps) => {
   const [clickClassName, setClickClassName] = useState('');
   const timeout = useRef<number | null>(null);
 
@@ -25,7 +33,14 @@ export const Button = ({ children, className, disabled, onClick, ...props }: But
 
   return (
     <button
-      className={clsx(styles.button, disabled && styles.disabled, clickClassName, className)}
+      className={clsx(
+        styles.button,
+        size === 'small' && styles.small,
+        direction === 'vertical' && styles.vertical,
+        disabled && styles.disabled,
+        clickClassName,
+        className,
+      )}
       onClick={e => {
         localClickHandler();
         onClick?.(e);

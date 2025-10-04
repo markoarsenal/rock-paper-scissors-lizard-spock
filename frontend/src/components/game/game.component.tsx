@@ -8,6 +8,7 @@ import { Choice, Choices } from '@/components/choices';
 import { Loader } from '@/components/loader';
 import PlayIcon from '@/assets/icons/media-play.svg?react';
 import { type GameState, LoaderText } from './game.props';
+import { ScoreLine } from '@/components/score-line';
 
 import styles from './game.module.scss';
 
@@ -15,6 +16,8 @@ export const Game = () => {
   const [showStartButton, setShowStartButton] = useState(true);
   const [game, setGame] = useState<GameState>({
     started: false,
+    playerScore: 20,
+    computerScore: 22,
     choice: undefined,
   });
   const [loaderText, setLoaderText] = useState(LoaderText.COMPUTER_WAITING);
@@ -49,6 +52,7 @@ export const Game = () => {
           </Button>
         </div>
       )}
+      {game.started && <ScoreLine playerScore={game.playerScore} computerScore={game.computerScore} />}
     </main>
   );
 };

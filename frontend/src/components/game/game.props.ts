@@ -2,6 +2,8 @@ import type { Choice } from '../choices/choices.props';
 
 export type GameState = {
   started: boolean;
+  playerScore: number;
+  computerScore: number;
   choice?: Choice;
 };
 
