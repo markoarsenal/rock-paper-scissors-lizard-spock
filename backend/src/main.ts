@@ -14,12 +14,16 @@ async function bootstrap() {
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
 
-  SwaggerModule.setup('swagger', app, documentFactory);
+  app.enableCors({
+    origin: 'http://localhost:5173',
+  });
   app.useGlobalPipes(new ValidationPipe());
+  SwaggerModule.setup('swagger', app, documentFactory);
 
   await app.listen(process.env.PORT ?? 3001, process.env.HOST ?? 'localhost');
   console.log(
     `Server is running on http://${process.env.HOST ?? 'localhost'}:${process.env.PORT ?? 3001}`,
   );
 }
+
 bootstrap();

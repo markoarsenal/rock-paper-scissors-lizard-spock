@@ -30,7 +30,7 @@ export class PlayRequest {
 export type PlayResult = 'win' | 'lose' | 'tie';
 
 export type PlayResponse = {
-  results: PlayResult;
+  result: PlayResult;
   player: number;
   computer: number;
 };

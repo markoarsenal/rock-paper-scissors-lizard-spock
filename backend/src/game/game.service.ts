@@ -81,10 +81,10 @@ export class GameService {
     const computerChoiceResponse = await this.getRandomChoice();
     const computerChoice = computerChoiceResponse.id;
 
-    const results = this.determineWinner(playerChoice, computerChoice);
+    const result = this.determineWinner(playerChoice, computerChoice);
 
     return {
-      results,
+      result,
       player: playerChoice,
       computer: computerChoice,
     };

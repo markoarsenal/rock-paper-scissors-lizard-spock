@@ -1,4 +1,4 @@
-import type { Choice } from '../choices/choices.props';
+import type { Choice } from '@/types/choice';
 
 export type GameState = {
   started: boolean;
@@ -8,6 +8,7 @@ export type GameState = {
 };
 
 export enum LoaderText {
+  DATA_LOADING = 'Loading data...',
   COMPUTER_WAITING = 'Computer is waiting for your move...',
   COMPUTER_MAKING_MOVE = 'Computer is making its move...',
 }

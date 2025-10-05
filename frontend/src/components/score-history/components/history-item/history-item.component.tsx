@@ -1,12 +1,15 @@
 import type { FC } from 'react';
+import clsx from 'clsx';
 
 import { PlayerPerson, PlayerComputer } from '@/components/player';
 import type { HistoryItemProps } from './history-item.props';
 import { choiceOptions } from '@/shared/choice-options';
 
 export const HistoryItem: FC<HistoryItemProps> = ({ playerChoice, computerChoice, result, round }) => {
-  const choicePlayer = choiceOptions.find(choice => choice.value === playerChoice);
-  const choiceComputer = choiceOptions.find(choice => choice.value === computerChoice);
+  const choicePlayer = choiceOptions[playerChoice];
+  const choiceComputer = choiceOptions[computerChoice];
+
+  const commonClassNames = 'text-2xl font-bold text-center';
 
   return (
     <div className="flex justify-between items-center">
@@ -20,9 +23,9 @@ export const HistoryItem: FC<HistoryItemProps> = ({ playerChoice, computerChoice
           <p className="absolute bottom-full left-1/2 mb-1 -translate-x-1/2 text-sm text-gray-500 text-center text-nowrap">
             Round {round}
           </p>
-          {result === 'win' && <h3 className="text-2xl font-bold text-center text-green-500">Win</h3>}
-          {result === 'lose' && <h3 className="text-2xl font-bold text-center text-red-600">Lose</h3>}
-          {result === 'draw' && <h3 className="text-2xl font-bold text-center text-yellow-500">Draw</h3>}
+          {result === 'win' && <h3 className={clsx('text-green-500', commonClassNames)}>Win</h3>}
+          {result === 'lose' && <h3 className={clsx('text-red-600', commonClassNames)}>Lose</h3>}
+          {result === 'tie' && <h3 className={clsx('text-yellow-500', commonClassNames)}>Tie</h3>}
         </div>
         <div className="flex gap-2 justify-center items-center">
           <p className="text-secondary text-center">{choiceComputer?.label}</p>

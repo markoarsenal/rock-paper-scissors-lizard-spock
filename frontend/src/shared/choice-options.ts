@@ -6,35 +6,35 @@ import spock from '@/assets/images/play5.png';
 
 import { Choice } from '@/types/choice';
 
-export const choiceOptions: { id: number; image: string; label: string; value: Choice }[] = [
-  {
-    id: 0,
+export const choiceOptions: Record<Choice, { image: string; label: string; name: Choice; value: number }> = {
+  [Choice.ROCK]: {
     image: rock,
     label: 'Rock',
-    value: Choice.ROCK,
+    name: Choice.ROCK,
+    value: 1,
   },
-  {
-    id: 1,
+  [Choice.PAPER]: {
     image: paper,
     label: 'Paper',
-    value: Choice.PAPER,
+    name: Choice.PAPER,
+    value: 2,
   },
-  {
-    id: 2,
+  [Choice.SCISSORS]: {
     image: scissors,
     label: 'Scissors',
-    value: Choice.SCISSORS,
+    name: Choice.SCISSORS,
+    value: 3,
   },
-  {
-    id: 3,
+  [Choice.LIZARD]: {
     image: lizard,
     label: 'Lizard',
-    value: Choice.LIZARD,
+    name: Choice.LIZARD,
+    value: 4,
   },
-  {
-    id: 4,
+  [Choice.SPOCK]: {
     image: spock,
     label: 'Spock',
-    value: Choice.SPOCK,
+    name: Choice.SPOCK,
+    value: 5,
   },
-];
+};

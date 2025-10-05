@@ -9,21 +9,23 @@ import { getRandomNumberUpTo } from '@/helpers/random-number';
 import styles from './choices.module.scss';
 
 export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
+  const choices = Object.values(choiceOptions);
+
   const randomizeHandler = async () => {
     const number = await getRandomNumberUpTo(5);
-    onSelect?.(choiceOptions[number - 1].value);
+    onSelect?.(choices[number - 1].name);
   };
 
   return (
     <div className="aspect-square w-2/3 max-w-2/3 max-h-2/3 mt-12 relative">
-      {choiceOptions.map(({ id, label, image, value: choiceValue }) => {
-        const angle = id * 72;
+      {choices.map(({ value: choiceValue, label, image, name }) => {
+        const angle = (choiceValue - 1) * 72;
         const angleInRadians = (angle * Math.PI) / 180;
         const radius = 40;
         const x = 50 + radius * Math.sin(angleInRadians);
         const y = 50 - radius * Math.cos(angleInRadians);
 
-        const isSelected = value === choiceValue;
+        const isSelected = value === name;
 
         return (
           <button
@@ -41,7 +43,7 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
               left: `${x}%`,
               top: `${y}%`,
             }}
-            onClick={() => onSelect?.(choiceValue)}
+            onClick={() => onSelect?.(name)}
           >
             <div
               className={clsx(
