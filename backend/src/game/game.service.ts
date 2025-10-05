@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { firstValueFrom, timeout } from 'rxjs';
 
 import {
@@ -50,16 +50,22 @@ export class GameService {
       );
 
       const randomNumber = response.data.random_number;
+      console.log('randomNumber', randomNumber);
       const choiceIndex = Math.floor((randomNumber / 100) * choices.length);
+      console.log('choiceIndex', choiceIndex);
       const selectedChoice = choices[choiceIndex];
 
       return {
         id: choiceIndex + 1,
         name: selectedChoice,
       };
-    } catch {
+    } catch (error) {
+      console.log('error', error);
+
       // Fallback to custom random number generation
       const randomIndex = Math.floor(Math.random() * choices.length);
+      console.log('randomIndex', randomIndex);
+
       const selectedChoice = choices[randomIndex];
 
       return {
