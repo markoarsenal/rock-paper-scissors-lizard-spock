@@ -2,7 +2,9 @@ import { useEffect, useState, type FC } from 'react';
 import clsx from 'clsx';
 
 import type { ScoreLineProps } from './score-line.props';
-import { Button } from '../button';
+import { Button } from '@/components/button';
+import { Drawer } from '@/components/drawer';
+import { ScoreHistory } from '@/components/score-history';
 
 export const ScoreLine: FC<ScoreLineProps> = ({ playerScore, computerScore, className }) => {
   let playerProgress = playerScore / (playerScore + computerScore);
@@ -26,6 +28,8 @@ export const ScoreLine: FC<ScoreLineProps> = ({ playerScore, computerScore, clas
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  const [isScoreListOpen, setIsScoreListOpen] = useState(false);
 
   return (
     <div
@@ -59,10 +63,14 @@ export const ScoreLine: FC<ScoreLineProps> = ({ playerScore, computerScore, clas
           size="small"
           direction={isDesktop ? 'horizontal' : 'vertical'}
           className="[writing-mode:vertical-rl] lg:[writing-mode:horizontal-tb]"
+          onClick={() => setIsScoreListOpen(true)}
         >
           Score List
         </Button>
       </div>
+      <Drawer open={isScoreListOpen} onClose={() => setIsScoreListOpen(false)}>
+        <ScoreHistory />
+      </Drawer>
     </div>
   );
 };

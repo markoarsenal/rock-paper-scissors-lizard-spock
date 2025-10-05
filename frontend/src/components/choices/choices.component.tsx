@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import clsx from 'clsx';
 
 import { type ChoicesProps } from './choices.props';
-import { options } from './options';
+import { choiceOptions } from '@/shared/choice-options';
 import { ButtonRandomize } from '@/components/button-randomize';
 import { getRandomNumberUpTo } from '@/helpers/random-number';
 
@@ -11,12 +11,13 @@ import styles from './choices.module.scss';
 export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
   const randomizeHandler = async () => {
     const number = await getRandomNumberUpTo(5);
-    onSelect?.(options[number - 1].value);
+    onSelect?.(choiceOptions[number - 1].value);
   };
 
   return (
-    <div className="aspect-square w-2/3 max-w-2/3 max-h-2/3 relative">
-      {options.map(({ angle, label, image, value: choiceValue }) => {
+    <div className="aspect-square w-2/3 max-w-2/3 max-h-2/3 mt-12 relative">
+      {choiceOptions.map(({ id, label, image, value: choiceValue }) => {
+        const angle = id * 72;
         const angleInRadians = (angle * Math.PI) / 180;
         const radius = 40;
         const x = 50 + radius * Math.sin(angleInRadians);

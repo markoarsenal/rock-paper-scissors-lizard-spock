@@ -1,10 +1,4 @@
-export enum Choice {
-  ROCK = 'rock',
-  PAPER = 'paper',
-  SCISSORS = 'scissors',
-  LIZARD = 'lizard',
-  SPOCK = 'spock',
-}
+import type { Choice } from '@/types/choice';
 
 export type ChoicesProps = {
   value?: Choice;

@@ -2,13 +2,14 @@ import { useState } from 'react';
 import clsx from 'clsx';
 
 import { Button } from '@/components/button';
-import { PlayerPerson, PlayerComputer } from '@/components/player';
+import { PlayerPersonInGame, PlayerComputerInGame } from '@/components/player';
 import { getCssVariable } from '@/helpers/css-variables';
-import { Choice, Choices } from '@/components/choices';
+import { Choices } from '@/components/choices';
 import { Loader } from '@/components/loader';
 import PlayIcon from '@/assets/icons/media-play.svg?react';
 import { type GameState, LoaderText } from './game.props';
 import { ScoreLine } from '@/components/score-line';
+import { Choice } from '@/types/choice';
 
 import styles from './game.module.scss';
 
@@ -36,13 +37,13 @@ export const Game = () => {
   return (
     <main className="w-full h-screen flex flex-col overflow-hidden relative lg:flex-row">
       <section className={clsx(styles.leftSection, 'w-full h-full flex items-center justify-center lg:w-1/2 relative')}>
-        <PlayerPerson showAsThumbnail={game.started} animateShake={!game.started} />
+        <PlayerPersonInGame showAsThumbnail={game.started} animateShake={!game.started} />
         {game.started && <Choices value={game.choice} onSelect={handleChoice} />}
       </section>
       <section
         className={clsx(styles.rightSection, 'w-full h-full flex items-center justify-center lg:w-1/2 relative')}
       >
-        <PlayerComputer showAsThumbnail={game.started} animateShake={!game.started} />
+        <PlayerComputerInGame showAsThumbnail={game.started} animateShake={!game.started} />
         {game.started && <Loader text={loaderText} />}
       </section>
       {showStartButton && (

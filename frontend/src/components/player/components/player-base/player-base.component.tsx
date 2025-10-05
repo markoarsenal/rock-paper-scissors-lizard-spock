@@ -9,24 +9,20 @@ export const PlayerBase: FC<PlayerBaseProps> = ({
   image,
   animateShake = true,
   showAsThumbnail = false,
+  className,
   thumbnailClassName,
 }) => {
   const shakeClass = animateShake ? 'animate__animated animate__headShake animate__infinite' : '';
 
   const thumbnailClass = showAsThumbnail
     ? clsx(
-        'w-[100px] h-[100px] p-2 rounded-full border-4 border-white shadow-default top-4 left-4 translate-none',
+        'w-[100px] h-[100px] p-2 rounded-full border-4 border-white shadow-default translate-none',
         thumbnailClassName,
       )
     : 'h-1/2 max-h-[500px] lg:w-1/2 lg:max-w-[400px] lg:h-auto lg:max-h-none';
 
   return (
-    <div
-      className={clsx(
-        'transition-all duration-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
-        thumbnailClass,
-      )}
-    >
+    <div className={clsx('transition-all duration-400', className, thumbnailClass)}>
       <div className="w-full h-full flex items-center justify-center animate__animated animate__bounceIn">
         <img src={image} alt="Player" className={clsx('h-full', styles.player, shakeClass)} />
       </div>
