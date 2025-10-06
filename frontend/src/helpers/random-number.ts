@@ -1,17 +1,19 @@
 const RANDOM_NUMBER_API_URL = 'https://codechallenge.boohma.com/random';
 
 export const getRandomNumber = async (): Promise<number> => {
+  const randomNumber = Math.floor(Math.random() * 100);
+
   const apiRandomNumber: Promise<number> = fetch(RANDOM_NUMBER_API_URL)
     .then(res => res.json())
     .then((data: { random_number: number }) => {
-      console.log('apiRandomNumber', data.random_number - 1);
+      if (Number.isInteger(data.random_number)) return randomNumber;
       return data.random_number - 1;
-    });
+    })
+    .catch(() => randomNumber);
 
   const localRandomNumber = new Promise<number>(resolve => {
     setTimeout(() => {
-      const number = Math.floor(Math.random() * 100);
-      console.log('localRandomNumber', number);
+      const number = randomNumber;
       resolve(number);
     }, 1000);
   });

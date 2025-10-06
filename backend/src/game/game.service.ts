@@ -51,7 +51,13 @@ export class GameService {
       );
 
       const randomNumber = response.data.random_number;
-      const choiceIndex = Math.floor((randomNumber / 100) * choices.length);
+
+      if (Number.isInteger(randomNumber))
+        throw new Error('Random number is not an integer');
+
+      const choiceIndex = Math.floor(
+        ((randomNumber - 1) / 100) * choices.length,
+      );
       const selectedChoice = choices[choiceIndex];
 
       return {
@@ -61,7 +67,6 @@ export class GameService {
     } catch {
       // Fallback to custom random number generation
       const randomIndex = Math.floor(Math.random() * choices.length);
-
       const selectedChoice = choices[randomIndex];
 
       return {

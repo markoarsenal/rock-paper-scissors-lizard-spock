@@ -15,7 +15,6 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
 
   const randomizeHandler = async () => {
     const number = await getRandomNumberUpTo(5);
-    console.log('number', number);
     onSelect?.(choices[number].name);
   };
 
