@@ -7,12 +7,15 @@ import { getCssVariable } from '@/helpers/css-variables';
 import styles from './button.module.scss';
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ children, className, disabled, size = 'medium', direction = 'horizontal', onClick, ...props }, ref) => {
+  (
+    { children, className, disabled, size = 'medium', direction = 'horizontal', onClick, noAnimation, ...props },
+    ref,
+  ) => {
     const [clickClassName, setClickClassName] = useState('');
     const timeout = useRef<number | null>(null);
 
     const localClickHandler = () => {
-      if (!clickClassName) {
+      if (!clickClassName && !noAnimation) {
         setClickClassName(styles.animate);
         timeout.current = setTimeout(() => setClickClassName(''), parseInt(getCssVariable('--btn-animate-duration')));
       }
