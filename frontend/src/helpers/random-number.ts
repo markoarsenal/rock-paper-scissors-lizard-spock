@@ -22,5 +22,5 @@ export const getRandomNumber = async (): Promise<number> => {
 export const getRandomNumberUpTo = async (max: number) => {
   const number = await getRandomNumber();
 
-  return Math.round((number / 100) * max);
+  return Math.floor((number / 100) * max);
 };

@@ -6,7 +6,10 @@ import { Button } from '@/components/button';
 import { Drawer } from '@/components/drawer';
 import { ScoreHistory } from '@/components/score-history';
 
-export const ScoreLine: FC<ScoreLineProps> = ({ playerScore, computerScore, className }) => {
+export const ScoreLine: FC<ScoreLineProps> = ({ roundResults, className }) => {
+  const playerScore = roundResults.filter(({ result }) => result === 'win').length;
+  const computerScore = roundResults.filter(({ result }) => result === 'lose').length;
+
   let playerProgress = playerScore / (playerScore + computerScore);
   let computerProgress = computerScore / (playerScore + computerScore);
 
@@ -69,7 +72,7 @@ export const ScoreLine: FC<ScoreLineProps> = ({ playerScore, computerScore, clas
         </Button>
       </div>
       <Drawer open={isScoreListOpen} onClose={() => setIsScoreListOpen(false)}>
-        <ScoreHistory />
+        <ScoreHistory roundResults={roundResults} />
       </Drawer>
     </div>
   );

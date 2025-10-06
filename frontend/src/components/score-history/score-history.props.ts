@@ -1,6 +1,5 @@
 import type { RoundResultType } from '@/components/game/game.props';
 
-export type ScoreLineProps = {
+export type ScoreHistoryProps = {
   roundResults: RoundResultType[];
-  className?: string;
 };

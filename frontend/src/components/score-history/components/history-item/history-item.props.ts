@@ -1,9 +1,5 @@
-import type { Choice } from '@/types/choice';
-import type { PlayResult } from '@/types/play';
+import type { RoundResultType } from '@/components/game/game.props';
 
 export type HistoryItemProps = {
-  playerChoice: Choice;
-  computerChoice: Choice;
-  result: PlayResult;
-  round: number;
+  roundResult: RoundResultType;
 };

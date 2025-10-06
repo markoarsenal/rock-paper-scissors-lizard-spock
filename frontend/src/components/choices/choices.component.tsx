@@ -13,7 +13,8 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
 
   const randomizeHandler = async () => {
     const number = await getRandomNumberUpTo(5);
-    onSelect?.(choices[number - 1].name);
+    console.log('number', number);
+    onSelect?.(choices[number].name);
   };
 
   return (

@@ -7,7 +7,7 @@ import { getCssVariable } from '@/helpers/css-variables';
 import { Choices } from '@/components/choices';
 import { Loader } from '@/components/loader';
 import PlayIcon from '@/assets/icons/media-play.svg?react';
-import { type GameState, LoaderText } from './game.props';
+import { LoaderText } from './game.props';
 import { ScoreLine } from '@/components/score-line';
 import { Choice } from '@/types/choice';
 import { useChoices } from './hooks/use-choices';
@@ -17,6 +17,8 @@ import { choiceOptions } from '@/shared/choice-options';
 import { ComputerSide } from '@/components/computer-side';
 import type { PlayResult } from '@/types/play';
 import { RoundResult } from '@/components/round-result';
+import { RoundIndicator } from '@/components/round-indicator';
+import type { RoundResultType } from './game.props';
 
 import styles from './game.module.scss';
 
@@ -27,13 +29,27 @@ export const Game = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [playerChoice, setPlayerChoice] = useState<Choice>();
   const [computerChoice, setComputerChoice] = useState<Choice>();
+  const [roundNumber, setRoundNumber] = useState(1);
   const [roundResult, setRoundResult] = useState<PlayResult>();
+  const [roundResults, setRoundResults] = useState<RoundResultType[]>([]);
   const [loaderText, setLoaderText] = useState(LoaderText.COMPUTER_WAITING);
 
   const { loading: choicesLoading, error: choicesError } = useChoices();
-  const { playMove } = usePlayMove(({ computer, result }) => {
-    setComputerChoice(choices.find(({ value }) => value === computer)?.name);
-    setRoundResult(result);
+  const { playMove } = usePlayMove(playResult => {
+    setComputerChoice(choices.find(({ value }) => value === playResult.computer)?.name);
+    console.log('playResult.computer', playResult.computer);
+
+    setRoundResult(playResult.result);
+    setRoundResults(prev => [...prev, { ...playResult, roundNumber: roundNumber }]);
+
+    // New round after 2 seconds
+    setTimeout(() => {
+      setRoundNumber(prev => prev + 1);
+      setPlayerChoice(undefined);
+      setComputerChoice(undefined);
+      setRoundResult(undefined);
+      setLoaderText(LoaderText.COMPUTER_WAITING);
+    }, 2000);
   });
 
   const startGame = () => {
@@ -77,6 +93,12 @@ export const Game = () => {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 lg:top-1/4"
         />
       )}
+      {gameStarted && !computerChoice && !showStartButton && (
+        <RoundIndicator
+          roundNumber={roundNumber}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 lg:top-1/4"
+        />
+      )}
       <section
         className={clsx(
           styles.rightSection,
@@ -93,7 +115,7 @@ export const Game = () => {
           </Button>
         </div>
       )}
-      {gameStarted && <ScoreLine playerScore={22} computerScore={12} />}
+      {gameStarted && <ScoreLine roundResults={roundResults} />}
     </main>
   );
 };
