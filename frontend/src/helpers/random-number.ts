@@ -4,12 +4,14 @@ export const getRandomNumber = async (): Promise<number> => {
   const apiRandomNumber: Promise<number> = fetch(RANDOM_NUMBER_API_URL)
     .then(res => res.json())
     .then((data: { random_number: number }) => {
-      return data.random_number;
+      console.log('apiRandomNumber', data.random_number - 1);
+      return data.random_number - 1;
     });
 
   const localRandomNumber = new Promise<number>(resolve => {
     setTimeout(() => {
       const number = Math.floor(Math.random() * 100);
+      console.log('localRandomNumber', number);
       resolve(number);
     }, 1000);
   });

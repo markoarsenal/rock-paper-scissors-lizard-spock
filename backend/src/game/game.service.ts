@@ -39,32 +39,28 @@ export class GameService {
   }
 
   async getRandomChoice(): Promise<ChoiceResponse> {
+    const RANDOM_NUMBER_API_URL = 'https://codechallenge.boohma.com/random';
     const choices = Object.values(Choice);
 
     try {
       // Try to get random number from external API with 1s timeout
       const response = await firstValueFrom(
         this.httpService
-          .get<RandomNumberResponse>('https://codechallenge.boohma.com/random')
+          .get<RandomNumberResponse>(RANDOM_NUMBER_API_URL)
           .pipe(timeout(1000)),
       );
 
       const randomNumber = response.data.random_number;
-      console.log('randomNumber', randomNumber);
       const choiceIndex = Math.floor((randomNumber / 100) * choices.length);
-      console.log('choiceIndex', choiceIndex);
       const selectedChoice = choices[choiceIndex];
 
       return {
         id: choiceIndex + 1,
         name: selectedChoice,
       };
-    } catch (error) {
-      console.log('error', error);
-
+    } catch {
       // Fallback to custom random number generation
       const randomIndex = Math.floor(Math.random() * choices.length);
-      console.log('randomIndex', randomIndex);
 
       const selectedChoice = choices[randomIndex];
 

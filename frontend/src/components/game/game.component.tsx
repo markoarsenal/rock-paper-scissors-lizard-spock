@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import clsx from 'clsx';
 
 import { Button } from '@/components/button';
@@ -19,6 +19,8 @@ import type { PlayResult } from '@/types/play';
 import { RoundResult } from '@/components/round-result';
 import { RoundIndicator } from '@/components/round-indicator';
 import type { RoundResultType } from './game.props';
+import RefreshIcon from '@/assets/icons/rotate.svg?react';
+import { useKeyboardControls } from './hooks/use-keyboard-controls';
 
 import styles from './game.module.scss';
 
@@ -34,16 +36,16 @@ export const Game = () => {
   const [roundResults, setRoundResults] = useState<RoundResultType[]>([]);
   const [loaderText, setLoaderText] = useState(LoaderText.COMPUTER_WAITING);
 
+  const newRoundTimeout = useRef<number | null>(null);
+
   const { loading: choicesLoading, error: choicesError } = useChoices();
   const { playMove } = usePlayMove(playResult => {
     setComputerChoice(choices.find(({ value }) => value === playResult.computer)?.name);
-    console.log('playResult.computer', playResult.computer);
-
     setRoundResult(playResult.result);
     setRoundResults(prev => [...prev, { ...playResult, roundNumber: roundNumber }]);
 
     // New round after 2 seconds
-    setTimeout(() => {
+    newRoundTimeout.current = setTimeout(() => {
       setRoundNumber(prev => prev + 1);
       setPlayerChoice(undefined);
       setComputerChoice(undefined);
@@ -52,10 +54,10 @@ export const Game = () => {
     }, 2000);
   });
 
-  const startGame = () => {
+  const startGame = useCallback(() => {
     setGameStarted(true);
     setTimeout(() => setShowStartButton(false), parseInt(getCssVariable('--btn-animate-duration')));
-  };
+  }, []);
 
   const handleChoice = (choice: Choice) => {
     if (playerChoice) return;
@@ -64,6 +66,19 @@ export const Game = () => {
     setLoaderText(LoaderText.COMPUTER_MAKING_MOVE);
     playMove(choiceOptions[choice].value);
   };
+
+  const resetGame = useCallback(() => {
+    if (newRoundTimeout.current) clearTimeout(newRoundTimeout.current);
+
+    setRoundNumber(1);
+    setRoundResult(undefined);
+    setRoundResults([]);
+    setPlayerChoice(undefined);
+    setComputerChoice(undefined);
+    setLoaderText(LoaderText.COMPUTER_WAITING);
+  }, []);
+
+  useKeyboardControls({ onGameStart: startGame, onGameReset: resetGame });
 
   if (choicesError)
     return (
@@ -116,6 +131,20 @@ export const Game = () => {
         </div>
       )}
       {gameStarted && <ScoreLine roundResults={roundResults} />}
+
+      <div className="absolute bottom-0 p-4 gap-8 justify-between items-center w-full hidden lg:flex">
+        <p className="text-shadow-sm">
+          Press <span className="text-2xl px-1">Enter</span> to start game and{' '}
+          <span className="text-2xl px-1">Backspace</span> to reset game. Use <span className="text-2xl px-1">1-5</span>{' '}
+          to select exact choice or <span className="text-2xl px-1">Space</span> to randomize.
+        </p>
+        {gameStarted && (
+          <Button size="small" onClick={resetGame}>
+            Reset Game
+            <RefreshIcon width={20} height={20} />
+          </Button>
+        )}
+      </div>
     </main>
   );
 };

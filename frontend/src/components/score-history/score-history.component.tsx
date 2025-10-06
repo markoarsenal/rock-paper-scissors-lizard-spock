@@ -14,12 +14,18 @@ export const ScoreHistory: FC<ScoreHistoryProps> = ({ roundResults }) => {
       <p className="text-xl font-bold text-center text-gray-400">
         <span className="text-main">{playerScore}</span> : <span className="text-secondary">{computerScore}</span>
       </p>
-      <h3 className="mt-8 text-lg font-bold text-center text-gray-400">Latest 10 scores</h3>
-      <div className="flex flex-col gap-2 mt-4">
-        {last10Results.map(roundResult => (
-          <HistoryItem key={roundResult.roundNumber} roundResult={roundResult} />
-        ))}
-      </div>
+      {last10Results.length > 0 ? (
+        <>
+          <h3 className="mt-8 text-lg font-bold text-center text-gray-400">Latest 10 scores</h3>
+          <div className="flex flex-col gap-2 mt-4">
+            {last10Results.map(roundResult => (
+              <HistoryItem key={roundResult.roundNumber} roundResult={roundResult} />
+            ))}
+          </div>
+        </>
+      ) : (
+        <p className="mt-8 text-lg font-bold text-center text-gray-400">No scores yet</p>
+      )}
     </div>
   );
 };

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 export const RoundResult: FC<RoundResultProps> = ({ result, className }) => {
   const commonClassNames = clsx(
-    'px-8 py-4 text-4xl font-bold text-center rounded-lg bg-white shadow-default animate__animated animate__bounceIn',
+    'px-8 py-3 text-3xl font-bold text-center rounded-lg bg-white text-nowrap shadow-default animate__animated animate__bounceIn',
     className,
   );
 

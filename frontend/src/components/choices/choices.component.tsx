@@ -1,21 +1,28 @@
-import type { FC } from 'react';
+import { useRef, type FC } from 'react';
 import clsx from 'clsx';
 
 import { type ChoicesProps } from './choices.props';
 import { choiceOptions } from '@/shared/choice-options';
 import { ButtonRandomize } from '@/components/button-randomize';
 import { getRandomNumberUpTo } from '@/helpers/random-number';
+import { useKeyboardControls } from './use-keyboard-controls';
 
 import styles from './choices.module.scss';
 
 export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
   const choices = Object.values(choiceOptions);
+  const randomizeButtonRef = useRef<HTMLButtonElement>(null);
 
   const randomizeHandler = async () => {
     const number = await getRandomNumberUpTo(5);
     console.log('number', number);
     onSelect?.(choices[number].name);
   };
+
+  useKeyboardControls({
+    onRandomize: () => randomizeButtonRef.current?.click(),
+    onSelect: num => onSelect?.(choices[num].name),
+  });
 
   return (
     <div className="aspect-square w-2/3 max-w-2/3 max-h-2/3 mt-12 relative">
@@ -63,7 +70,7 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
         );
       })}
       <div className="w-1/4 aspect-square absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate__animated animate__zoomInDown">
-        <ButtonRandomize disabled={Boolean(value)} onClick={randomizeHandler} />
+        <ButtonRandomize ref={randomizeButtonRef} disabled={Boolean(value)} onClick={randomizeHandler} />
       </div>
     </div>
   );

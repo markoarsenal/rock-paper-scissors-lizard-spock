@@ -5,6 +5,7 @@ import type { ScoreLineProps } from './score-line.props';
 import { Button } from '@/components/button';
 import { Drawer } from '@/components/drawer';
 import { ScoreHistory } from '@/components/score-history';
+import ListIcon from '@/assets/icons/list.svg?react';
 
 export const ScoreLine: FC<ScoreLineProps> = ({ roundResults, className }) => {
   const playerScore = roundResults.filter(({ result }) => result === 'win').length;
@@ -58,7 +59,7 @@ export const ScoreLine: FC<ScoreLineProps> = ({ roundResults, className }) => {
       <div>{computerScore}</div>
       <div
         className={clsx(
-          'absolute top-1/2 left-full -translate-y-1/2',
+          'absolute top-1/2 left-full ml-4 -translate-y-1/2',
           'lg:top-full lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-0',
         )}
       >
@@ -69,6 +70,7 @@ export const ScoreLine: FC<ScoreLineProps> = ({ roundResults, className }) => {
           onClick={() => setIsScoreListOpen(true)}
         >
           Score List
+          <ListIcon width={20} height={20} />
         </Button>
       </div>
       <Drawer open={isScoreListOpen} onClose={() => setIsScoreListOpen(false)}>
