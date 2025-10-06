@@ -46,11 +46,11 @@ export const ScoreLine: FC<ScoreLineProps> = ({ roundResults, className }) => {
       <div>{playerScore}</div>
       <div className="h-[50vh] w-4 border-4 border-white rounded-xl overflow-hidden shadow-default relative lg:h-4 lg:w-[50vw]">
         <div
-          className="w-full absolute top-0 left-0 bg-main lg:h-full"
+          className="w-full absolute top-0 left-0 bg-main lg:h-full transition-all duration-300"
           style={{ ...(isDesktop ? { width: `${playerProgress * 100}%` } : { height: `${playerProgress * 100}%` }) }}
         ></div>
         <div
-          className="w-full absolute bottom-0 right-0 bg-secondary lg:h-full"
+          className="w-full absolute bottom-0 right-0 bg-secondary lg:h-full transition-all duration-300"
           style={{
             ...(isDesktop ? { width: `${computerProgress * 100}%` } : { height: `${computerProgress * 100}%` }),
           }}

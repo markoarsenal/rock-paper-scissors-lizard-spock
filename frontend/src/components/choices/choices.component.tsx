@@ -1,4 +1,4 @@
-import { useRef, type FC } from 'react';
+import { useCallback, useMemo, useRef, type FC } from 'react';
 import clsx from 'clsx';
 
 import { type ChoicesProps } from './choices.props';
@@ -10,7 +10,7 @@ import { useKeyboardControls } from './use-keyboard-controls';
 import styles from './choices.module.scss';
 
 export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
-  const choices = Object.values(choiceOptions);
+  const choices = useMemo(() => Object.values(choiceOptions), []);
   const randomizeButtonRef = useRef<HTMLButtonElement>(null);
 
   const randomizeHandler = async () => {
@@ -19,9 +19,15 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
     onSelect?.(choices[number].name);
   };
 
+  const randomizeKeyboardHandler = useCallback(() => {
+    randomizeButtonRef.current?.click();
+  }, []);
+
+  const selectKeyboardHandler = useCallback((num: number) => onSelect?.(choices[num].name), [choices, onSelect]);
+
   useKeyboardControls({
-    onRandomize: () => randomizeButtonRef.current?.click(),
-    onSelect: num => onSelect?.(choices[num].name),
+    onRandomize: randomizeKeyboardHandler,
+    onSelect: selectKeyboardHandler,
   });
 
   return (
