@@ -63,7 +63,7 @@
     position: absolute;
     left: -20%;
     z-index: -1000;
-    transition: all ease-in-out var(--btn-animate-duration);
+    transition: all ease-in-out calc(var(--btn-animate-duration) * 1ms);
     background-repeat: no-repeat;
   }
 
@@ -116,11 +116,11 @@
   &.animate {
     &:before {
       display: block;
-      animation: topBubbles ease-in-out var(--btn-animate-duration) forwards;
+      animation: topBubbles ease-in-out calc(var(--btn-animate-duration) * 1ms) forwards;
     }
     &:after {
       display: block;
-      animation: bottomBubbles ease-in-out var(--btn-animate-duration) forwards;
+      animation: bottomBubbles ease-in-out calc(var(--btn-animate-duration) * 1ms) forwards;
     }
   }
 }

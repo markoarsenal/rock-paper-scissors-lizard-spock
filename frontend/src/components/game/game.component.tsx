@@ -36,6 +36,8 @@ export const Game = () => {
   const [roundResults, setRoundResults] = useState<RoundResultType[]>([]);
   const [loaderText, setLoaderText] = useState(LoaderText.COMPUTER_WAITING);
 
+  const startButtonRef = useRef<HTMLButtonElement>(null);
+  const resetButtonRef = useRef<HTMLButtonElement>(null);
   const newRoundTimeout = useRef<number | null>(null);
 
   const { loading: choicesLoading, error: choicesError } = useChoices();
@@ -54,10 +56,12 @@ export const Game = () => {
     }, 2000);
   });
 
-  const startGame = useCallback(() => {
+  const startGame = () => {
     setGameStarted(true);
     setTimeout(() => setShowStartButton(false), parseInt(getCssVariable('--btn-animate-duration')));
-  }, []);
+  };
+
+  const clickStartButton = useCallback(() => startButtonRef.current?.click(), []);
 
   const handleChoice = (choice: Choice) => {
     if (playerChoice) return;
@@ -67,7 +71,7 @@ export const Game = () => {
     playMove(choiceOptions[choice].value);
   };
 
-  const resetGame = useCallback(() => {
+  const resetGame = () => {
     if (newRoundTimeout.current) clearTimeout(newRoundTimeout.current);
 
     setRoundNumber(1);
@@ -76,9 +80,11 @@ export const Game = () => {
     setPlayerChoice(undefined);
     setComputerChoice(undefined);
     setLoaderText(LoaderText.COMPUTER_WAITING);
-  }, []);
+  };
 
-  useKeyboardControls({ onGameStart: startGame, onGameReset: resetGame });
+  const clickResetButton = useCallback(() => resetButtonRef.current?.click(), []);
+
+  useKeyboardControls({ onGameStart: clickStartButton, onGameReset: clickResetButton });
 
   if (choicesError)
     return (
@@ -125,7 +131,7 @@ export const Game = () => {
 
       {showStartButton && (
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate__animated animate__zoomInDown">
-          <Button onClick={startGame}>
+          <Button onClick={startGame} ref={startButtonRef}>
             Start Game <PlayIcon width={32} height={32} />
           </Button>
         </div>
@@ -139,7 +145,7 @@ export const Game = () => {
           to select exact choice or <span className="text-2xl px-1">Space</span> to randomize.
         </p>
         {gameStarted && (
-          <Button size="small" onClick={resetGame}>
+          <Button size="small" onClick={resetGame} ref={resetButtonRef}>
             Reset Game
             <RefreshIcon width={20} height={20} />
           </Button>
