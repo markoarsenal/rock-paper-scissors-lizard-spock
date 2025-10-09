@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { apiService } from '@/shared/api-service';
 import type { PlayResponse } from '@/types/play';
 
 export const usePlayMove = (onSuccess?: (response: PlayResponse) => void, onError?: (error: Error) => void) => {
@@ -12,7 +11,17 @@ export const usePlayMove = (onSuccess?: (response: PlayResponse) => void, onErro
     setError(undefined);
 
     try {
-      const response = await apiService.post('/game/play', { body: JSON.stringify({ player: move }) });
+      // TODO: Replace with new logic
+      // Placeholder game logic - no backend call
+      const computer = Math.floor(Math.random() * 5) + 1; // Random number 1-5
+
+      // Placeholder result - always returns 'tie' for now
+      const response: PlayResponse = {
+        player: move,
+        computer,
+        result: 'tie',
+      };
+
       onSuccess?.(response);
       return response;
     } catch (error) {

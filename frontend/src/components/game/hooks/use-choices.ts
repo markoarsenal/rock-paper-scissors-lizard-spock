@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { apiService } from '@/shared/api-service';
-import type { Choice } from '@/types/choice';
+import { Choice } from '@/types/choice';
 
 export const useChoices = () => {
   const [data, setData] = useState<Choice[]>([]);
@@ -13,12 +12,13 @@ export const useChoices = () => {
       try {
         setLoading(true);
 
-        const [data] = await Promise.all([
-          apiService.get('/game/choices'),
-          new Promise(resolve => setTimeout(resolve, 3000)), // Ensure minimum 3 seconds loading time to show the loader properly to the user
-        ]);
+        // Static choices data - no backend call
+        const staticChoices = [Choice.ROCK, Choice.PAPER, Choice.SCISSORS, Choice.LIZARD, Choice.SPOCK];
 
-        setData(data);
+        // Ensure minimum 3 seconds loading time to show the loader properly to the user
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
+        setData(staticChoices);
       } catch (err) {
         console.log('Catch Error', err);
         setError(err as Error);
