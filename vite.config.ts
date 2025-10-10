@@ -5,6 +5,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
+  base: '/rock-paper-scissors-lizard-spock/',
   plugins: [
     react({
       babel: {

@@ -18,7 +18,7 @@ export const HistoryItem: FC<HistoryItemProps> = ({ roundResult }) => {
       <div className="flex justify-between items-center flex-grow h-16 px-4 py-2 rounded-lg bg-gray-200 relative">
         <div className="flex gap-2 justify-center items-center">
           <img src={choicePlayer?.image} alt="Spock" className="h-10" />
-          <p className="text-main text-center">{choicePlayer?.label}</p>
+          <p className="text-main text-center max-lg:hidden">{choicePlayer?.label}</p>
         </div>
         <div>
           <p className="absolute bottom-full left-1/2 mb-1 -translate-x-1/2 text-sm text-gray-500 text-center text-nowrap">
@@ -29,7 +29,7 @@ export const HistoryItem: FC<HistoryItemProps> = ({ roundResult }) => {
           {roundResult.result === 'tie' && <h3 className={clsx('text-yellow-500', commonClassNames)}>Tie</h3>}
         </div>
         <div className="flex gap-2 justify-center items-center">
-          <p className="text-secondary text-center">{choiceComputer?.label}</p>
+          <p className="text-secondary text-center max-lg:hidden">{choiceComputer?.label}</p>
           <img src={choiceComputer?.image} alt="Lizard" className="h-10" />
         </div>
       </div>
