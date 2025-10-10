@@ -7,9 +7,6 @@
 
 ## How to run the project
 
-### Frontend
-
-- In your Terminal navigate to the frontend project
 - Run `npm install`
 - Run `npm run dev`
 - Open `http://localhost:5173/` in your browser to play the game
