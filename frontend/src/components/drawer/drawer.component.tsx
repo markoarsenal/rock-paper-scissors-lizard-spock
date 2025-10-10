@@ -4,6 +4,7 @@ import clsx from 'clsx';
 
 import type { DrawerProps } from './drawer.props';
 import { getCssVariable } from '@/helpers/css-variables';
+import XIcon from '@/assets/icons/x.svg?react';
 
 import styles from './drawer.module.scss';
 
@@ -45,6 +46,13 @@ export const Drawer: FC<PropsWithChildren<DrawerProps>> = ({ open, onClose, chil
                 !open && 'animate__slideOutRight',
               )}
             >
+              <button
+                onClick={closeHandler}
+                className="absolute top-4 left-4 p-2 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                aria-label="Close drawer"
+              >
+                <XIcon className="w-8 h-8 text-gray-700" />
+              </button>
               {children}
             </div>
           </div>,

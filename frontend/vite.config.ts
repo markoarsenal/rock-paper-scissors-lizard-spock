@@ -15,4 +15,8 @@ export default defineConfig({
     tsconfigPaths(),
     svgr(),
   ],
+  server: {
+    host: true, // Expose to network
+    port: 5173, // Default port
+  },
 });

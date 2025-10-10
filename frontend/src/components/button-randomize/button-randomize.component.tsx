@@ -13,8 +13,13 @@ export const ButtonRandomize = forwardRef<HTMLButtonElement, ButtonRandomizeProp
       if (isThrowing) return;
 
       setIsThrowing(true);
-      onClick?.(e);
-      setTimeout(() => setIsThrowing(false), parseInt(getCssVariable('--dice-animate-duration')));
+      setTimeout(
+        () => {
+          setIsThrowing(false);
+          onClick?.(e);
+        },
+        parseInt(getCssVariable('--dice-animate-duration')),
+      );
     };
 
     return (

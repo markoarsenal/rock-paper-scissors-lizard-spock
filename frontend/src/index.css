@@ -5,6 +5,9 @@
   --secondary-color: #eb8a69;
   --secondary-color-dark: #e4665b;
 
+  --gradient-vertical: linear-gradient(to bottom, var(--main-color), var(--secondary-color));
+  --gradient-horizontal: linear-gradient(to right, var(--main-color), var(--secondary-color));
+
   --default-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
   --secondary-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.25);
 
@@ -22,6 +25,13 @@
   --shadow-secondary: var(--secondary-shadow);
 }
 
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   font-family: 'DynaPuff', system-ui;
   font-optical-sizing: auto;
@@ -29,9 +39,36 @@ body {
   font-style: normal;
   font-variation-settings: 'width' 100;
   color: white;
-  background: linear-gradient(to bottom, var(--main-color), var(--secondary-color));
+  background: var(--gradient-vertical);
 
   @media (min-width: 1024px) {
-    background: linear-gradient(to right, var(--main-color), var(--secondary-color));
+    background: var(--gradient-horizontal);
+  }
+}
+
+/* Landscape orientation warning for mobile devices */
+@media screen and (max-width: 1023px) and (orientation: landscape) {
+  body {
+    background: white;
+  }
+
+  body::after {
+    content: 'Please rotate your device to portrait mode';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    text-align: center;
+    font-size: 32px;
+    background: var(--gradient-horizontal);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  #root {
+    display: none;
   }
 }

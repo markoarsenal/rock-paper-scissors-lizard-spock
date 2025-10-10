@@ -13,8 +13,8 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
   const choices = useMemo(() => Object.values(choiceOptions), []);
   const randomizeButtonRef = useRef<HTMLButtonElement>(null);
 
-  const randomizeHandler = async () => {
-    const number = await getRandomNumberUpTo(5);
+  const randomizeHandler = () => {
+    const number = getRandomNumberUpTo(5);
     onSelect?.(choices[number].name);
   };
 

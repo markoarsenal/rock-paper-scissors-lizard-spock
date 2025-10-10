@@ -14,7 +14,7 @@ export const HistoryItem: FC<HistoryItemProps> = ({ roundResult }) => {
 
   return (
     <div className="flex justify-between items-center">
-      <PlayerPerson showAsThumbnail animateShake={false} className="scale-75 !border-2 !border-black" />
+      <PlayerPerson showAsThumbnail animateShake={false} className="scale-70 !border-2 !border-black" />
       <div className="flex justify-between items-center flex-grow h-16 px-4 py-2 rounded-lg bg-gray-200 relative">
         <div className="flex gap-2 justify-center items-center">
           <img src={choicePlayer?.image} alt="Spock" className="h-10" />
@@ -33,7 +33,7 @@ export const HistoryItem: FC<HistoryItemProps> = ({ roundResult }) => {
           <img src={choiceComputer?.image} alt="Lizard" className="h-10" />
         </div>
       </div>
-      <PlayerComputer showAsThumbnail animateShake={false} className="scale-75 !border-2 !border-black" />
+      <PlayerComputer showAsThumbnail animateShake={false} className="scale-70 !border-2 !border-black" />
     </div>
   );
 };
