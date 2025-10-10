@@ -6,23 +6,45 @@ import { choiceOptions } from '@/shared/choice-options';
 import { ButtonRandomize } from '@/components/button-randomize';
 import { getRandomNumberInRange } from '@/helpers/random-number';
 import { useKeyboardControls } from './use-keyboard-controls';
+import type { Choice } from '@/types/choice';
 
 import styles from './choices.module.scss';
 
 export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
   const choices = useMemo(() => Object.values(choiceOptions), []);
   const randomizeButtonRef = useRef<HTMLButtonElement>(null);
+  const cancelRandomizeHandler = useRef<boolean>(false);
 
   const randomizeHandler = () => {
+    if (cancelRandomizeHandler.current) {
+      cancelRandomizeHandler.current = false;
+      return;
+    }
+
     const number = getRandomNumberInRange(1, 5);
     onSelect?.(choices[number - 1].name);
+  };
+
+  const onRandomizeStartHandler = () => {
+    cancelRandomizeHandler.current = false;
   };
 
   const randomizeKeyboardHandler = useCallback(() => {
     randomizeButtonRef.current?.click();
   }, []);
 
-  const selectKeyboardHandler = useCallback((num: number) => onSelect?.(choices[num].name), [choices, onSelect]);
+  const selectHandler = (choice: Choice) => {
+    cancelRandomizeHandler.current = true;
+    onSelect?.(choice);
+  };
+
+  const selectKeyboardHandler = useCallback(
+    (num: number) => {
+      cancelRandomizeHandler.current = true;
+      onSelect?.(choices[num].name);
+    },
+    [choices, onSelect],
+  );
 
   useKeyboardControls({
     onRandomize: randomizeKeyboardHandler,
@@ -56,7 +78,7 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
               left: `${x}%`,
               top: `${y}%`,
             }}
-            onClick={() => onSelect?.(name)}
+            onClick={() => selectHandler(name)}
           >
             <div
               className={clsx(
@@ -82,7 +104,12 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
         );
       })}
       <div className="w-1/4 aspect-square absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate__animated animate__zoomInDown">
-        <ButtonRandomize ref={randomizeButtonRef} disabled={Boolean(value)} onClick={randomizeHandler} />
+        <ButtonRandomize
+          ref={randomizeButtonRef}
+          disabled={Boolean(value)}
+          onClick={randomizeHandler}
+          onRandomizeStart={onRandomizeStartHandler}
+        />
       </div>
     </div>
   );

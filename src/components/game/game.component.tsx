@@ -142,14 +142,14 @@ export const Game = () => {
           )}
           {gameStarted && <ScoreLine roundResults={roundResults} />}
 
-          <div className="absolute bottom-0 p-4 gap-8 justify-between items-center w-full hidden lg:flex">
-            <p className="text-shadow-sm">
+          <div className="absolute bottom-0 p-4 flex gap-8 justify-between items-center w-full">
+            <p className="text-shadow-sm hidden lg:block">
               Press <span className="text-2xl px-1">Enter</span> to start game and{' '}
               <span className="text-2xl px-1">Backspace</span> to reset. Use <span className="text-2xl px-1">1-5</span>{' '}
               to select exact choice or <span className="text-2xl px-1">Space</span> to randomize.
             </p>
             {gameStarted && (
-              <Button size="small" onClick={resetGame} ref={resetButtonRef}>
+              <Button size="small" className="ml-auto" onClick={resetGame} ref={resetButtonRef}>
                 Reset Game
                 <RefreshIcon width={20} height={20} />
               </Button>

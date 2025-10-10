@@ -1,6 +1,8 @@
 // CREDITS: https://codepen.io/nourabusoud/pen/ypZzMM
 
 .button {
+  --bubble-color: #fff;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,11 +36,7 @@
   }
 
   &:hover {
-    transform: scale(1.1);
-  }
-
-  &:active {
-    transform: scale(1);
+    transform: scale(0.9);
     box-shadow: var(--secondary-shadow);
   }
 
@@ -48,6 +46,7 @@
     &:hover {
       transform: none;
     }
+
     &:active {
       transform: none;
       box-shadow: var(--default-shadow);
@@ -71,46 +70,46 @@
     display: none;
     top: -75%;
     background-image:
-      radial-gradient(circle, var(--main-color) 20%, transparent 20%),
-      radial-gradient(circle, transparent 20%, var(--main-color) 20%, transparent 30%),
-      radial-gradient(circle, var(--main-color) 20%, transparent 20%),
-      radial-gradient(circle, var(--main-color) 20%, transparent 20%),
-      radial-gradient(circle, transparent 10%, var(--main-color) 15%, transparent 20%),
-      radial-gradient(circle, var(--main-color) 20%, transparent 20%),
-      radial-gradient(circle, var(--main-color) 20%, transparent 20%),
-      radial-gradient(circle, var(--main-color) 20%, transparent 20%),
-      radial-gradient(circle, var(--main-color) 20%, transparent 20%);
+      radial-gradient(circle, var(--bubble-color) 20%, transparent 20%),
+      radial-gradient(circle, transparent 20%, var(--bubble-color) 20%, transparent 30%),
+      radial-gradient(circle, var(--bubble-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--bubble-color) 20%, transparent 20%),
+      radial-gradient(circle, transparent 10%, var(--bubble-color) 15%, transparent 20%),
+      radial-gradient(circle, var(--bubble-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--bubble-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--bubble-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--bubble-color) 20%, transparent 20%);
     background-size:
-      10% 10%,
       20% 20%,
-      15% 15%,
+      40% 40%,
+      30% 30%,
+      40% 40%,
+      36% 36%,
       20% 20%,
-      18% 18%,
-      10% 10%,
-      15% 15%,
-      10% 10%,
-      18% 18%;
+      30% 30%,
+      20% 20%,
+      36% 36%;
   }
 
   &:after {
     display: none;
     bottom: -75%;
     background-image:
-      radial-gradient(circle, var(--main-color) 20%, transparent 20%),
-      radial-gradient(circle, var(--main-color) 20%, transparent 20%),
-      radial-gradient(circle, transparent 10%, var(--main-color) 15%, transparent 20%),
-      radial-gradient(circle, var(--main-color) 20%, transparent 20%),
-      radial-gradient(circle, var(--main-color) 20%, transparent 20%),
-      radial-gradient(circle, var(--main-color) 20%, transparent 20%),
-      radial-gradient(circle, var(--main-color) 20%, transparent 20%);
+      radial-gradient(circle, var(--bubble-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--bubble-color) 20%, transparent 20%),
+      radial-gradient(circle, transparent 10%, var(--bubble-color) 15%, transparent 20%),
+      radial-gradient(circle, var(--bubble-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--bubble-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--bubble-color) 20%, transparent 20%),
+      radial-gradient(circle, var(--bubble-color) 20%, transparent 20%);
     background-size:
-      15% 15%,
+      30% 30%,
+      40% 40%,
+      36% 36%,
+      40% 40%,
+      30% 30%,
       20% 20%,
-      18% 18%,
-      20% 20%,
-      15% 15%,
-      10% 10%,
-      20% 20%;
+      40% 40%;
   }
 
   &.animate {
@@ -128,6 +127,16 @@
     padding: 12px 24px;
     border-width: 4px;
     font-size: 24px;
+
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: var(--default-shadow);
+    }
+
+    &:active {
+      transform: scale(1);
+      box-shadow: var(--secondary-shadow);
+    }
 
     &.small {
       padding: 8px 16px;

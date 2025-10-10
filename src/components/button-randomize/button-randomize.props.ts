@@ -1,3 +1,3 @@
 import type { HTMLProps } from 'react';
 
-export type ButtonRandomizeProps = HTMLProps<HTMLButtonElement>;
+export type ButtonRandomizeProps = { onRandomizeStart?: () => void } & HTMLProps<HTMLButtonElement>;
