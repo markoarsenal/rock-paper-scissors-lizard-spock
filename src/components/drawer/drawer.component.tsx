@@ -48,7 +48,7 @@ export const Drawer: FC<PropsWithChildren<DrawerProps>> = ({ open, onClose, chil
             >
               <button
                 onClick={closeHandler}
-                className="absolute top-4 left-4 p-2 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                className="absolute top-4 left-4 p-2 rounded-lg bg-gray-100  cursor-pointer z-10 transition-transform duration-200 hover:scale-110"
                 aria-label="Close drawer"
               >
                 <XIcon className="w-8 h-8 text-gray-700" />

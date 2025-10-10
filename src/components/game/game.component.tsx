@@ -60,13 +60,13 @@ export const Game = () => {
     setRoundResult(playResult.result);
     setRoundResults(prev => [...prev, { ...playResult, roundNumber: roundNumber }]);
 
-    // New round after 2 seconds
+    // New round after 2.5 seconds
     newRoundTimeout.current = setTimeout(() => {
       setRoundNumber(prev => prev + 1);
       setPlayerChoice(undefined);
       setComputerChoice(undefined);
       setRoundResult(undefined);
-    }, 2000);
+    }, 2500);
   };
 
   const resetGame = () => {
@@ -82,6 +82,12 @@ export const Game = () => {
   const clickResetButton = useCallback(() => resetButtonRef.current?.click(), []);
 
   useKeyboardControls({ onGameStart: clickStartButton, onGameReset: clickResetButton });
+
+  useEffect(() => {
+    return () => {
+      if (newRoundTimeout.current) clearTimeout(newRoundTimeout.current);
+    };
+  }, []);
 
   return (
     <>
@@ -105,13 +111,13 @@ export const Game = () => {
           {roundResult && (
             <RoundResult
               result={roundResult}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 lg:top-1/4"
+              className="absolute top-1/2 left-1/2 mt-1 -translate-x-1/2 -translate-y-1/2 z-10 lg:top-1/4 lg:mt-0"
             />
           )}
           {gameStarted && !computerChoice && !showStartButton && (
             <RoundIndicator
               roundNumber={roundNumber}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 lg:top-1/4"
+              className="absolute top-1/2 left-1/2 mt-1 -translate-x-1/2 -translate-y-1/2 z-10 lg:top-1/4 lg:mt-0"
             />
           )}
           <section
@@ -139,9 +145,8 @@ export const Game = () => {
           <div className="absolute bottom-0 p-4 gap-8 justify-between items-center w-full hidden lg:flex">
             <p className="text-shadow-sm">
               Press <span className="text-2xl px-1">Enter</span> to start game and{' '}
-              <span className="text-2xl px-1">Backspace</span> to reset game. Use{' '}
-              <span className="text-2xl px-1">1-5</span> to select exact choice or{' '}
-              <span className="text-2xl px-1">Space</span> to randomize.
+              <span className="text-2xl px-1">Backspace</span> to reset. Use <span className="text-2xl px-1">1-5</span>{' '}
+              to select exact choice or <span className="text-2xl px-1">Space</span> to randomize.
             </p>
             {gameStarted && (
               <Button size="small" onClick={resetGame} ref={resetButtonRef}>

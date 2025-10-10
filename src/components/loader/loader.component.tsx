@@ -12,7 +12,7 @@ export const Loader: FC<LoaderProps> = ({ text, className }) => {
       )}
     >
       {text && (
-        <h3 className="text-3xl text-center font-bold text-shadow-sm animate__animated animate__pulse animate__infinite">
+        <h3 className="text-xl text-center font-bold text-shadow-sm animate__animated animate__pulse animate__infinite lg:text-3xl">
           {text}
         </h3>
       )}

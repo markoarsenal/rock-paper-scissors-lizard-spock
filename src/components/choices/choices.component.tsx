@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { type ChoicesProps } from './choices.props';
 import { choiceOptions } from '@/shared/choice-options';
 import { ButtonRandomize } from '@/components/button-randomize';
-import { getRandomNumberUpTo } from '@/helpers/random-number';
+import { getRandomNumberInRange } from '@/helpers/random-number';
 import { useKeyboardControls } from './use-keyboard-controls';
 
 import styles from './choices.module.scss';
@@ -14,8 +14,8 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
   const randomizeButtonRef = useRef<HTMLButtonElement>(null);
 
   const randomizeHandler = () => {
-    const number = getRandomNumberUpTo(5);
-    onSelect?.(choices[number].name);
+    const number = getRandomNumberInRange(1, 5);
+    onSelect?.(choices[number - 1].name);
   };
 
   const randomizeKeyboardHandler = useCallback(() => {
@@ -45,7 +45,7 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
             key={label}
             className={clsx(
               styles.choiceWrapper,
-              'w-1/4 absolute transform -translate-x-1/2 -translate-y-1/2 rounded-full',
+              'w-1/4 h-0 pt-[25%] absolute transform -translate-x-1/2 -translate-y-1/2 rounded-full',
               isSelected && 'scale-110',
               value
                 ? 'cursor-default'
@@ -61,13 +61,20 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
             <div
               className={clsx(
                 styles.choice,
-                'p-2 border-4 aspect-square rounded-full bg-main shadow-default animate__animated animate__zoomInDown',
+                'absolute top-0 left-0 w-full h-full p-2 border-2 rounded-full bg-main shadow-default animate__animated animate__zoomInDown',
+                'lg:border-4',
                 isSelected ? 'border-black' : 'border-white',
                 !value && 'active:scale-90 active:shadow-secondary',
               )}
             >
               <img src={image} alt={label} className="w-full h-full object-contain" />
-              <h3 className={clsx('text-2xl text-shadow-sm absolute -top-8 z-10', isSelected && 'text-black')}>
+              <h3
+                className={clsx(
+                  'text-md text-shadow-sm absolute -top-8 z-10',
+                  'lg:text-2xl',
+                  isSelected && 'text-black',
+                )}
+              >
                 {label}
               </h3>
             </div>

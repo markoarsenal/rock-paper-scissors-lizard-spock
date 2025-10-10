@@ -1,5 +1,5 @@
 import type { PlayResponse } from '@/types/play';
-import { getRandomNumberUpTo } from '@/helpers/random-number';
+import { getRandomNumberInRange } from '@/helpers/random-number';
 
 const determineWinner = (player: number, computer: number): 'win' | 'lose' | 'tie' => {
   if (player === computer) return 'tie';
@@ -16,7 +16,7 @@ const determineWinner = (player: number, computer: number): 'win' | 'lose' | 'ti
 };
 
 export const playMove = (playerMove: number): PlayResponse => {
-  const computer = getRandomNumberUpTo(5);
+  const computer = getRandomNumberInRange(1, 5);
   const result = determineWinner(playerMove, computer);
 
   return {

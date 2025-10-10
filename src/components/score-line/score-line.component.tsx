@@ -43,8 +43,8 @@ export const ScoreLine: FC<ScoreLineProps> = ({ roundResults, className }) => {
         className,
       )}
     >
-      <div>{playerScore}</div>
-      <div className="h-[50vh] w-4 border-4 border-white rounded-xl overflow-hidden shadow-default relative lg:h-4 lg:w-[50vw]">
+      <div className="text-2xl lg:text-3xl">{playerScore}</div>
+      <div className="h-[50vh] w-2 border-2 border-white rounded-xl overflow-hidden shadow-default relative lg:h-4 lg:w-[50vw] lg:border-4">
         <div
           className="w-full absolute top-0 left-0 bg-main lg:h-full transition-all duration-300"
           style={{ ...(isDesktop ? { width: `${playerProgress * 100}%` } : { height: `${playerProgress * 100}%` }) }}
@@ -56,11 +56,11 @@ export const ScoreLine: FC<ScoreLineProps> = ({ roundResults, className }) => {
           }}
         ></div>
       </div>
-      <div>{computerScore}</div>
+      <div className="text-2xl lg:text-3xl">{computerScore}</div>
       <div
         className={clsx(
-          'absolute top-1/2 left-full ml-4 -translate-y-1/2',
-          'lg:top-full lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-0',
+          'absolute top-1/2 left-full ml-2 -translate-y-1/2',
+          'lg:top-full lg:left-1/2 lg:ml-auto lg:-translate-x-1/2 lg:-translate-y-0',
         )}
       >
         <Button
