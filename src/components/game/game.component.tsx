@@ -16,7 +16,7 @@ import type { PlayResult } from '@/types/play';
 import { RoundResult } from '@/components/round-result';
 import { RoundIndicator } from '@/components/round-indicator';
 import type { RoundResultType } from './game.props';
-import RefreshIcon from '@/assets/icons/rotate.svg?react';
+import { Footer } from '@/components/footer';
 import { useKeyboardControls } from './hooks/use-keyboard-controls';
 
 import styles from './game.module.scss';
@@ -69,7 +69,7 @@ export const Game = () => {
     }, 2500);
   };
 
-  const resetGame = () => {
+  const resetGame = useCallback(() => {
     if (newRoundTimeout.current) clearTimeout(newRoundTimeout.current);
 
     setRoundNumber(1);
@@ -77,7 +77,7 @@ export const Game = () => {
     setRoundResults([]);
     setPlayerChoice(undefined);
     setComputerChoice(undefined);
-  };
+  }, []);
 
   const clickResetButton = useCallback(() => resetButtonRef.current?.click(), []);
 
@@ -144,19 +144,7 @@ export const Game = () => {
           )}
           {gameStarted && <ScoreLine roundResults={roundResults} />}
 
-          <div className="absolute bottom-0 p-4 flex gap-8 justify-between items-center w-full">
-            <p className="text-shadow-sm hidden lg:block">
-              Press <span className="text-2xl px-1">Enter</span> to start game and{' '}
-              <span className="text-2xl px-1">Backspace</span> to reset. Use <span className="text-2xl px-1">1-5</span>{' '}
-              to select exact choice or <span className="text-2xl px-1">Space</span> to randomize.
-            </p>
-            {gameStarted && (
-              <Button size="small" className="ml-auto" onClick={resetGame} ref={resetButtonRef}>
-                Reset Game
-                <RefreshIcon width={20} height={20} />
-              </Button>
-            )}
-          </div>
+          <Footer gameStarted={gameStarted} onReset={resetGame} resetButtonRef={resetButtonRef} />
         </main>
       </Activity>
     </>

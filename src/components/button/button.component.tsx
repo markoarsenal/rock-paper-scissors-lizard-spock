@@ -1,9 +1,8 @@
-import { useState, useRef, useEffect, forwardRef } from 'react';
+import { useState, forwardRef } from 'react';
 import clsx from 'clsx';
 import { triggerHaptic } from '@/helpers/haptic';
 
 import type { ButtonProps } from './button.props';
-import { getCssVariable } from '@/helpers/css-variables';
 
 import styles from './button.module.scss';
 
@@ -13,20 +12,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref,
   ) => {
     const [clickClassName, setClickClassName] = useState('');
-    const timeout = useRef<number | null>(null);
 
     const localClickHandler = () => {
-      if (!clickClassName && !noAnimation) {
-        setClickClassName(styles.animate);
-        timeout.current = setTimeout(() => setClickClassName(''), parseInt(getCssVariable('--btn-animate-duration')));
-      }
+      if (!clickClassName && !noAnimation) setClickClassName(styles.animate);
     };
-
-    useEffect(() => {
-      return () => {
-        if (timeout.current) clearTimeout(timeout.current);
-      };
-    }, []);
 
     return (
       <button
@@ -39,6 +28,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           clickClassName,
           className,
         )}
+        onAnimationEnd={() => setClickClassName('')}
         onClick={e => {
           triggerHaptic();
           localClickHandler();

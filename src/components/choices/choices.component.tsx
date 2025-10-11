@@ -99,7 +99,7 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect, clickDisabled }) =>
               className={clsx(
                 styles.choice,
                 'absolute top-0 left-0 w-full h-full p-2 border-2 rounded-full bg-main shadow-default animate__animated animate__zoomInDown',
-                'lg:border-4',
+                'lg:border-4 lg:p-4',
                 isSelected ? 'border-black' : 'border-white',
                 !value && 'active:scale-90 active:shadow-secondary',
               )}
@@ -107,8 +107,8 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect, clickDisabled }) =>
               <img src={image} alt={label} className="w-full h-full object-contain" />
               <h3
                 className={clsx(
-                  'text-md text-shadow-sm absolute -top-8 z-10',
-                  'lg:text-2xl',
+                  'text-md text-shadow-sm absolute -top-6.5 left-1/2 -translate-x-1/2 z-10',
+                  'lg:-top-10 lg:text-2xl',
                   isSelected && 'text-black',
                 )}
               >
