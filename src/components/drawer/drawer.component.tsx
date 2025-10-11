@@ -26,7 +26,12 @@ export const Drawer: FC<PropsWithChildren<DrawerProps>> = ({ open, onClose, chil
   useEffect(() => {
     // Close the drawer when the escape key is pressed
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && open) onClose();
+      if (event.key === 'Escape' && open) {
+        // Blur the currently focused element to prevent focus return
+        if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+
+        onClose();
+      }
     };
 
     document.addEventListener('keydown', handleKeyDown);
