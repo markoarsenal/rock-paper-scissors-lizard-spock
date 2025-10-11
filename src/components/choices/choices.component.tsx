@@ -1,21 +1,25 @@
 import { useCallback, useMemo, useRef, type FC } from 'react';
 import clsx from 'clsx';
 
+import { triggerHaptic } from '@/helpers/haptic';
 import { type ChoicesProps } from './choices.props';
 import { choiceOptions } from '@/shared/choice-options';
 import { ButtonRandomize } from '@/components/button-randomize';
 import { getRandomNumberInRange } from '@/helpers/random-number';
 import { useKeyboardControls } from './use-keyboard-controls';
 import type { Choice } from '@/types/choice';
+import { getCssVariable } from '@/helpers/css-variables';
 
 import styles from './choices.module.scss';
 
-export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
+export const Choices: FC<ChoicesProps> = ({ value, onSelect, clickDisabled }) => {
   const choices = useMemo(() => Object.values(choiceOptions), []);
   const randomizeButtonRef = useRef<HTMLButtonElement>(null);
   const cancelRandomizeHandler = useRef<boolean>(false);
 
   const randomizeHandler = () => {
+    if (clickDisabled) return;
+
     if (cancelRandomizeHandler.current) {
       cancelRandomizeHandler.current = false;
       return;
@@ -26,24 +30,35 @@ export const Choices: FC<ChoicesProps> = ({ value, onSelect }) => {
   };
 
   const onRandomizeStartHandler = () => {
+    if (clickDisabled) return;
+
+    triggerHaptic();
+    setTimeout(triggerHaptic, parseInt(getCssVariable('--dice-animate-duration')) - 10); // Trigger another haptic tick before the dice animation is complete and choice is selected
     cancelRandomizeHandler.current = false;
   };
 
   const randomizeKeyboardHandler = useCallback(() => {
+    if (clickDisabled) return;
     randomizeButtonRef.current?.click();
-  }, []);
+  }, [clickDisabled]);
 
   const selectHandler = (choice: Choice) => {
+    if (clickDisabled) return;
+
     cancelRandomizeHandler.current = true;
+    triggerHaptic();
     onSelect?.(choice);
   };
 
   const selectKeyboardHandler = useCallback(
     (num: number) => {
+      if (clickDisabled) return;
+
       cancelRandomizeHandler.current = true;
+      triggerHaptic();
       onSelect?.(choices[num].name);
     },
-    [choices, onSelect],
+    [choices, clickDisabled, onSelect],
   );
 
   useKeyboardControls({

@@ -106,7 +106,9 @@ export const Game = () => {
             )}
           >
             <PlayerPersonInGame showAsThumbnail={gameStarted} animateShake={!gameStarted} />
-            {gameStarted && <Choices value={playerChoice} onSelect={handleChoice} />}
+            {gameStarted && (
+              <Choices value={playerChoice} onSelect={handleChoice} clickDisabled={Boolean(playerChoice)} />
+            )}
           </section>
           {roundResult && (
             <RoundResult

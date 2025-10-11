@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, forwardRef } from 'react';
 import clsx from 'clsx';
+import { triggerHaptic } from '@/helpers/haptic';
 
 import type { ButtonProps } from './button.props';
 import { getCssVariable } from '@/helpers/css-variables';
@@ -39,6 +40,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           className,
         )}
         onClick={e => {
+          triggerHaptic();
           localClickHandler();
           onClick?.(e);
         }}
