@@ -14,7 +14,7 @@ export const ComputerSide: FC<ComputerSideProps> = ({ gameStarted, loaderText, c
       {computerChoice && (
         <div
           className={clsx(
-            'flex flex-col items-center justify-center gap-4 w-[200px] h-[200px] p-4 border-4 border-black bg-secondary rounded-full shadow-default animate__animated animate__bounceIn',
+            'flex flex-col items-center justify-center gap-2 w-[200px] h-[200px] p-4 border-4 border-black bg-secondary rounded-full shadow-default animate__animated animate__bounceIn',
             'lg:w-[250px] lg:h-[250px]',
             '2xl:w-[350px] 2xl:h-[350px] 2xl:border-6',
           )}
@@ -22,7 +22,7 @@ export const ComputerSide: FC<ComputerSideProps> = ({ gameStarted, loaderText, c
           <img
             src={choiceOptions[computerChoice].image}
             alt={computerChoice}
-            className="h-[100px] drop-shadow-md lg:h-[150px] 2xl:h-[250px]"
+            className="h-[120px] drop-shadow-md lg:h-[150px] 2xl:h-[230px]"
           />
           <h3 className="text-xl text-black text-shadow-md capitalize lg:text-2xl 2xl:text-3xl">{computerChoice}</h3>
         </div>

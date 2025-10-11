@@ -9,7 +9,7 @@ export const Footer = memo(({ gameStarted, onReset, resetButtonRef }: FooterProp
   count++;
   console.log('Footer rendered', count);
   return (
-    <div className="absolute bottom-0 p-4 flex gap-8 justify-between items-center w-full">
+    <div className="absolute bottom-0 w-full p-4 flex gap-8 justify-between items-center z-10">
       <p className="text-shadow-sm hidden lg:block">
         Press <span className="text-2xl px-1">Enter</span> to start game and{' '}
         <span className="text-2xl px-1">Backspace</span> to reset. Use <span className="text-2xl px-1">1-5</span> to
