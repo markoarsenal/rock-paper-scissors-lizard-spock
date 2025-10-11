@@ -63,12 +63,7 @@ export const ScoreLine: FC<ScoreLineProps> = ({ roundResults, className }) => {
           'lg:top-full lg:left-1/2 lg:ml-auto lg:-translate-x-1/2 lg:-translate-y-0',
         )}
       >
-        <Button
-          size="small"
-          direction={isDesktop ? 'horizontal' : 'vertical'}
-          className="[writing-mode:vertical-rl] lg:[writing-mode:horizontal-tb]"
-          onClick={() => setIsScoreListOpen(true)}
-        >
+        <Button size="small" direction={isDesktop ? 'horizontal' : 'vertical'} onClick={() => setIsScoreListOpen(true)}>
           Score List
           <ListIcon width={20} height={20} />
         </Button>

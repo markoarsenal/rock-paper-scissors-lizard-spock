@@ -98,7 +98,7 @@ export const Game = () => {
       </Activity>
 
       <Activity mode={loadingGame ? 'visible' : 'hidden'}>
-        <main className="w-full h-full flex flex-col overflow-hidden relative lg:flex-row">
+        <main className="w-full h-full flex flex-col overflow-y-hidden relative lg:flex-row lg:overflow-hidden">
           <section
             className={clsx(
               styles.leftSection,

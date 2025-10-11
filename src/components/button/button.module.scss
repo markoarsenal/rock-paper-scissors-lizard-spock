@@ -33,6 +33,7 @@
   &.vertical {
     padding: 20px 10px;
     writing-mode: vertical-rl;
+    box-shadow: var(--secondary-shadow);
   }
 
   &:hover {
