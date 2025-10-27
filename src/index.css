@@ -2,15 +2,15 @@
 
 :root {
   --main-color: #49b9ba;
-  --main-color-dark: #fff;
+  --main-color-dark: #38a8a9;
   --secondary-color: #eb8a69;
   --secondary-color-dark: #e4665b;
 
   --gradient-vertical: linear-gradient(to bottom, var(--main-color), var(--secondary-color));
   --gradient-horizontal: linear-gradient(to right, var(--main-color), var(--secondary-color));
 
-  --default-shadow: 5px 5px 4px rgba(0, 0, 0, 0.25);
-  --secondary-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.25);
+  --default-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+  --secondary-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2);
 
   --btn-animate-duration: 500;
   --dice-animate-duration: 1000;
@@ -19,6 +19,7 @@
 
 @theme inline {
   --color-main: var(--main-color);
+  --color-main-dark: var(--main-color-dark);
   --color-secondary: var(--secondary-color);
   --color-secondary-dark: var(--secondary-color-dark);
 
@@ -69,7 +70,8 @@ body {
     color: transparent;
   }
 
-  #root {
+  #root,
+  #drawer {
     display: none;
   }
 }

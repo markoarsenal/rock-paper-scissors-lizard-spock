@@ -43,7 +43,7 @@ export const Drawer: FC<PropsWithChildren<DrawerProps>> = ({ open, onClose, chil
     <>
       {renderDrawer &&
         createPortal(
-          <div className="fixed inset-0 z-50">
+          <div id="drawer" className="fixed inset-0 z-50">
             <div className="absolute inset-0 backdrop-blur-sm hidden md:block" onClick={closeHandler} />
             <div
               className={clsx(

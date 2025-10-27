@@ -5,7 +5,6 @@ import { Button } from '@/components/button';
 import { PlayerPersonInGame } from '@/components/player';
 import { getCssVariable } from '@/helpers/css-variables';
 import { Choices } from '@/components/choices';
-import { Loader } from '@/components/loader';
 import PlayIcon from '@/assets/icons/media-play.svg?react';
 import { ScoreLine } from '@/components/score-line';
 import { Choice } from '@/types/choice';
@@ -20,11 +19,13 @@ import { Footer } from '@/components/footer';
 import { useKeyboardControls } from './hooks/use-keyboard-controls';
 
 import styles from './game.module.scss';
+import { WinsChoose } from '../wins-choose';
 
 export const Game = () => {
   const choices = Object.values(choiceOptions);
 
-  const [loadingGame, setLoadingGame] = useState(false);
+  const [numberOfWins, setNumberOfWins] = useState<number>(0);
+  const [showInitialScreen, setShowInitialScreen] = useState(false);
   const [showStartButton, setShowStartButton] = useState(true);
   const [gameStarted, setGameStarted] = useState(false);
   const [playerChoice, setPlayerChoice] = useState<Choice>();
@@ -36,11 +37,6 @@ export const Game = () => {
   const startButtonRef = useRef<HTMLButtonElement>(null);
   const resetButtonRef = useRef<HTMLButtonElement>(null);
   const newRoundTimeout = useRef<number | null>(null);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setLoadingGame(true), 2000);
-    return () => clearTimeout(timeout);
-  }, []);
 
   const startGame = () => {
     setGameStarted(true);
@@ -89,15 +85,18 @@ export const Game = () => {
     };
   }, []);
 
+  const numberOfWinsHandler = (numberOfWins: number) => {
+    setNumberOfWins(numberOfWins);
+    setTimeout(() => setShowInitialScreen(true), 1000);
+  };
+
   return (
     <>
-      <Activity mode={!loadingGame ? 'visible' : 'hidden'}>
-        <div className="flex justify-center items-center h-full">
-          <Loader text="Loading game..." />
-        </div>
+      <Activity mode={!showInitialScreen ? 'visible' : 'hidden'}>
+        <WinsChoose numberOfWins={numberOfWins} setNumberOfWins={numberOfWinsHandler} />
       </Activity>
 
-      <Activity mode={loadingGame ? 'visible' : 'hidden'}>
+      <Activity mode={showInitialScreen ? 'visible' : 'hidden'}>
         <main className="w-full h-full flex flex-col overflow-y-hidden relative lg:flex-row lg:overflow-hidden">
           <section
             className={clsx(

@@ -38,12 +38,19 @@ export const ScoreLine: FC<ScoreLineProps> = ({ roundResults, className }) => {
   return (
     <div
       className={clsx(
-        'flex flex-col justify-center items-center gap-4 absolute top-1/2 left-4 -translate-y-1/2 text-3xl font-bold text-shadow-lg animate__animated animate__bounceIn animate__delay-1s',
+        'flex flex-col justify-center items-center gap-4 absolute top-1/2 left-4 -translate-y-1/2 text-3xl font-bold text-shadow-lg/10 animate__animated animate__bounceIn animate__delay-1s',
         'lg:flex-row lg:top-12 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-0',
         className,
       )}
     >
-      <div className="text-2xl lg:text-3xl">{playerScore}</div>
+      <div
+        className={clsx(
+          'absolute bottom-full left-1/2 -translate-x-1/2 mb-2 text-2xl',
+          'lg:static lg:mb-0 lg:-translate-x-0 lg:text-3xl',
+        )}
+      >
+        {playerScore}
+      </div>
       <div className="h-[50vh] w-2 border-2 border-white rounded-xl overflow-hidden shadow-default relative lg:h-4 lg:w-[50vw] lg:border-4">
         <div
           className="w-full absolute top-0 left-0 bg-main lg:h-full transition-all duration-300"
@@ -56,7 +63,14 @@ export const ScoreLine: FC<ScoreLineProps> = ({ roundResults, className }) => {
           }}
         ></div>
       </div>
-      <div className="text-2xl lg:text-3xl">{computerScore}</div>
+      <div
+        className={clsx(
+          'absolute top-full left-1/2 -translate-x-1/2 mt-2 text-2xl',
+          'lg:static lg:mt-0 lg:-translate-x-0 lg:text-3xl',
+        )}
+      >
+        {computerScore}
+      </div>
       <div
         className={clsx(
           'absolute top-1/2 left-full ml-2 -translate-y-1/2',

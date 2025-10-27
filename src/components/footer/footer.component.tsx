@@ -3,11 +3,7 @@ import { Button } from '@/components/button';
 import RefreshIcon from '@/assets/icons/rotate.svg?react';
 import type { FooterProps } from './footer.props';
 
-let count = 0;
-
 export const Footer = memo(({ gameStarted, onReset, resetButtonRef }: FooterProps) => {
-  count++;
-  console.log('Footer rendered', count);
   return (
     <div className="absolute bottom-0 w-full p-4 flex gap-8 justify-between items-center z-10">
       <p className="text-shadow-sm hidden lg:block">

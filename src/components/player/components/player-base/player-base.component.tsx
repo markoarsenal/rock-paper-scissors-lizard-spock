@@ -16,7 +16,7 @@ export const PlayerBase: FC<PlayerBaseProps> = ({
 
   const thumbnailClass = showAsThumbnail
     ? clsx(
-        'w-[60px] h-[60px] p-2 rounded-full border-2 border-white shadow-default translate-none',
+        'w-[50px] h-[50px] p-2 rounded-full border-2 border-white shadow-default translate-none',
         'lg:w-[100px] lg:h-[100px] lg:border-4',
         thumbnailClassName,
       )
